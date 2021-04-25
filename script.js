@@ -52,7 +52,9 @@ window.onload = function () {
 function start() {
   //init vars
   // ||||| Change itemCount to add more particles |||||
-  particleCount = randomNumber(2, 50);
+  var getRanromNumber = randomNumber(3, 50);
+  document.title = "JS Particles | " + getRanromNumber;
+  particleCount = getRanromNumber;
   main_canvas = document.getElementById("c");
   main_context = main_canvas.getContext("2d");
   // auto adjust width and hight based on the window size
