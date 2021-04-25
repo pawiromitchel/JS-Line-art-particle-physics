@@ -49,6 +49,9 @@ function start() {
   //init vars
   main_canvas = document.getElementById("c");
   main_context = main_canvas.getContext("2d");
+  // auto adjust width and hight based on the window size
+  main_canvas.width = window.innerWidth;
+  main_canvas.height = window.innerHeight;
   canvasHeight = main_canvas.height;
   canvasWidth = main_canvas.width;
   addItems();
