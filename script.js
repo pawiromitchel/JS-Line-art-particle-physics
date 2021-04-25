@@ -1,4 +1,4 @@
-(function() {
+(function () {
   var lastTime = 0;
   var vendors = ['webkit', 'moz'];
   for (var x = 0; x < vendors.length && !window.requestAnimationFrame; ++x) {
@@ -8,19 +8,19 @@
   }
 
   if (!window.requestAnimationFrame)
-    window.requestAnimationFrame = function(callback, element) {
+    window.requestAnimationFrame = function (callback, element) {
       var currTime = new Date().getTime();
       var timeToCall = Math.max(0, 16 - (currTime - lastTime));
-      var id = window.setTimeout(function() {
-          callback(currTime + timeToCall);
-        },
+      var id = window.setTimeout(function () {
+        callback(currTime + timeToCall);
+      },
         timeToCall);
       lastTime = currTime + timeToCall;
       return id;
     };
 
   if (!window.cancelAnimationFrame)
-    window.cancelAnimationFrame = function(id) {
+    window.cancelAnimationFrame = function (id) {
       clearTimeout(id);
     };
 }());
@@ -34,19 +34,25 @@ var main_canvas,
   spd = 20;
 //
 var items = [],
-  // ||||| Change itemCount to add more particles |||||
-  itemCount = 20,
+  particleCount,
   itemW,
   itemH;
 
 var colorArr = ['#EC008B', '#A42B39', '#40bbff', '#86d300', '#F6893E', '#CE118C', '#FFF100', '#ED1847', '#44270d'];
 
-window.onload = function() {
+function randomNumber(min, max) {
+  const r = Math.random() * (max - min) + min
+  return Math.floor(r)
+}
+
+window.onload = function () {
   start();
 }
 
 function start() {
   //init vars
+  // ||||| Change itemCount to add more particles |||||
+  particleCount = randomNumber(2, 50);
   main_canvas = document.getElementById("c");
   main_context = main_canvas.getContext("2d");
   // auto adjust width and hight based on the window size
@@ -71,12 +77,12 @@ function build() {
 }
 
 function addItems() {
-  for (var i = 0; i < itemCount; i++) {
+  for (var i = 0; i < particleCount; i++) {
     var itm = {};
     itm.x = Math.floor(Math.random() * canvasWidth);
     itm.y = Math.floor(Math.random() * canvasHeight);
     //randomizes colors
-    // itm.color = colorArr[Math.floor(Math.random() * colorArr.length)]
+    itm.color = colorArr[Math.floor(Math.random() * colorArr.length)]
 
     //keeps colors in order
     itm.color = colorArr[i % colorArr.length]
